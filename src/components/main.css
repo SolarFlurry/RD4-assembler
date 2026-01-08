@@ -1,0 +1,31 @@
+:root {
+	--text: #e0e0e0;
+	--primary: #e04f4f;
+}
+
+body {
+	background-color: #1e2022;
+	color: var(--text);
+	font-family: 'Google Sans Flex', sans-serif;
+	font-weight: 200;
+	margin: 0;
+}
+
+#root {
+	width: 100vw;
+	height: 100vh;
+}
+
+.button {
+	font-size: 0.8rem;
+	padding: 1em 1.5em;
+	background-color: var(--primary);
+	width: fit-content;
+	height: fit-content;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.button:hover {
+	cursor: pointer;
+}

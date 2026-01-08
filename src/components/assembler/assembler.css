@@ -1,0 +1,12 @@
+.code-editor {
+	font-family: 'Fira Code', monospace;
+	background-color: #29292b;
+	color: var(--text);
+	border: none;
+	border-radius: 0;
+	resize: none;
+}
+
+.code-editor:focus-visible {
+	outline: none;
+}
