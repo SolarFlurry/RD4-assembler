@@ -23,11 +23,12 @@ root.add(
 					document.body.removeChild(a);
 					URL.revokeObjectURL(a.href);
 				}),
-				new ButtonComponent("Load", () => {})
+				new ButtonComponent("Load", () => { })
 			], [1, 1, 1]), "1rem")
 		],
 		[
 			6,
 			2,
 		]
-	))
+	)
+)
