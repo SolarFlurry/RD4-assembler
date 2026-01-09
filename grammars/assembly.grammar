@@ -1,4 +1,4 @@
-@top File { (Instr | Comment | Label | Reg | Decimal | Binary | Hex | Char)* }
+@top File { (Instr | Comment | Label | Reg | Number | Char)* }
 
 @skip { space }
 
@@ -8,8 +8,11 @@
 	Instr {$[A-Z]$[A-Z]$[A-Z]}
 	Label {"."$[A-Za-z_]$[A-Za-z0-9_]*}
 	Reg {"r"$[0-9]+}
-	Binary {"0b"$[0-1]+}
-	Hex {"0x"$[0-9A-Fa-f]+}
-	Decimal {($[1-9]$[0-9]*) | "0" !["x" | "b"]}
+	Number {
+    	@digit+ |
+    	"0x" (@digit | $[a-fA-F])+ |
+    	"0b" $[01]+ |
+    	"0o" $[0-7]+
+  	}
 	Char {"'"_"'"}
 }

@@ -5,7 +5,5 @@ export const
   Comment = 3,
   Label = 4,
   Reg = 5,
-  Decimal = 6,
-  Binary = 7,
-  Hex = 8,
-  Char = 9
+  Number = 6,
+  Char = 7

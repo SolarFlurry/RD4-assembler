@@ -15,9 +15,7 @@ const assemblyLangage = LRLanguage.define({
 				Instr: tags.operatorKeyword,
 				Label: tags.labelName,
 				Reg: tags.className,
-				Decimal: tags.number,
-				Binary: tags.number,
-				Hex: tags.number,
+				Number: tags.number,
 				Char: tags.character,
 			})
 		]

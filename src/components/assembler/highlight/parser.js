@@ -2,14 +2,14 @@
 import {LRParser} from "@lezer/lr"
 export const parser = LRParser.deserialize({
   version: 14,
-  states: "hQVQPOOOOQO'#Cf'#CfQVQPOOOOQO-E6d-E6d",
-  stateData: "q~O]OS~OQPORPOSPOTPOUPOVPOWPOXPO~O",
-  goto: "bZPPPPPPPPPP[QQORRQ",
-  nodeNames: "⚠ File Instr Comment Label Reg Decimal Binary Hex Char",
-  maxTerm: 13,
+  states: "hQVQPOOOOQO'#Cd'#CdQVQPOOOOQO-E6b-E6b",
+  stateData: "k~OZOS~OQPORPOSPOTPOUPOVPO~O",
+  goto: "`XPPPPPPPPYQQORRQ",
+  nodeNames: "⚠ File Instr Comment Label Reg Number Char",
+  maxTerm: 11,
   skippedNodes: [0],
   repeatNodeCount: 1,
-  tokenData: "&o~RaX^!Wpq!Wwx!{!O!P#m!Q!R$[!R![%_!]!^%g!c!}&O#f#g&a#y#z!W$f$g!W#BY#BZ!W$IS$I_!W$I|$JO!W$JT$JU!W$KV$KW!W&FU&FV!W~!]Y]~X^!Wpq!W#y#z!W$f$g!W#BY#BZ!W$IS$I_!W$I|$JO!W$JT$JU!W$KV$KW!W&FU&FV!W~#ORO;'S#X;'S;=`#d;=`O#X~#[Pwx#_~#dOX~~#gQwx#_;=`<%l#X~#pR!c!}#y#R#S#y#T#o#y~$OSS~!Q![#y!c!}#y#R#S#y#T#o#y~$_Q#U#V$e#l#m$s~$hP!Q!S$k~$pPV~!Q!S$k~$vR!Q![%P!c!i%P#T#Z%P~%URW~!Q![%P!c!i%P#T#Z%P~%dPU~!Q![%_~%lSR~OY%gZ;'S%g;'S;=`%x<%lO%g~%{P;=`<%l%g~&RP!c!}&U~&XP!c!}&[~&aOQ~~&dP!Q![&g~&lPT~!Q![&g",
+  tokenData: "']~RaX^!Wpq!Wwx!{!O!P#m!Q!R$[!R![$m!]!^&T!c!}&l#f#g&}#y#z!W$f$g!W#BY#BZ!W$IS$I_!W$I|$JO!W$JT$JU!W$KV$KW!W&FU&FV!W~!]YZ~X^!Wpq!W#y#z!W$f$g!W#BY#BZ!W$IS$I_!W$I|$JO!W$JT$JU!W$KV$KW!W&FU&FV!W~#ORO;'S#X;'S;=`#d;=`O#X~#[Pwx#_~#dOV~~#gQwx#_;=`<%l#X~#pR!c!}#y#R#S#y#T#o#y~$OSS~!Q![#y!c!}#y#R#S#y#T#o#y~$aSU~!Q![$m#U#V$u#c#d%Z#l#m%i~$rPU~!Q![$m~$xQ!Q!R%O!R!S%O~%TQU~!Q!R%O!R!S%O~%^P!Q!Y%a~%fPU~!Q!Y%a~%lR!Q![%u!c!i%u#T#Z%u~%zRU~!Q![%u!c!i%u#T#Z%u~&YSR~OY&TZ;'S&T;'S;=`&f<%lO&T~&iP;=`<%l&T~&oP!c!}&r~&uP!c!}&x~&}OQ~~'QP!Q!['T~'YPT~!Q!['T",
   tokenizers: [0],
   topRules: {"File":[0,1]},
   tokenPrec: 0
