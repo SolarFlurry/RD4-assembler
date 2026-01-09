@@ -2,14 +2,22 @@ import './main.css'
 
 export abstract class Component {
 	element: HTMLElement
+	constructor(element: HTMLElement, css?: Partial<CSSStyleDeclaration>) {
+		this.element = element;
+		if (css) {
+			for (const key of Object.keys(css)) {
+				this.element.style[key as any] = css[key as any];
+			}
+		}
+	}
 }
 
 class Root extends Component {
 	private children: Component[]
 	constructor() {
-		super();
+		super(document.createElement('div'));
 		this.children = []
-		this.element = document.createElement('div');
+		this.element.style
 		this.element.id = "root"
 		document.body.appendChild(this.element);
 	}

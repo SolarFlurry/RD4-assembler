@@ -2,9 +2,9 @@ import { Component } from "../component";
 
 export class HorizontalLayout extends Component {
 	children: Component[]
-	constructor(components: Component[], sizes: number[]) {
-		super()
-		this.element = document.createElement('div');
+	constructor(components: Component[], sizes: number[], css?: Partial<CSSStyleDeclaration>) {
+		super(document.createElement('div'), css)
+
 		this.element.style.display = 'grid';
 		this.element.style.justifyContent = 'space-around';
 		this.element.style.height = "100%";
@@ -21,8 +21,9 @@ export class HorizontalLayout extends Component {
 
 export class VerticalLayout extends Component {
 	children: Component[]
-	constructor(components: Component[], sizes: number[]) {
-		super()
+	constructor(components: Component[], sizes: number[], css?: Partial<CSSStyleDeclaration>) {
+		super(document.createElement('div'), css)
+
 		this.element = document.createElement('div');
 		this.element.style.display = 'grid';
 		this.element.style.justifyContent = 'space-around';

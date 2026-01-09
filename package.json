@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack serve --mode development"
+    "start": "webpack serve --mode development",
+    "prepare": "lezer-generator grammars/assembly.grammar -o src/components/assembler/highlight/parser.js"
   },
   "private": true,
   "keywords": [],
@@ -15,6 +16,7 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@lezer/generator": "^1.8.0",
     "css-loader": "^7.1.2",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.4",
@@ -22,6 +24,12 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
+    "@codemirror/language": "^6.12.1",
+    "@codemirror/state": "^6.5.3",
+    "@codemirror/view": "^6.39.9",
+    "@lezer/highlight": "^1.2.3",
+    "@lezer/lr": "^1.4.7",
+    "codemirror": "^6.0.2",
     "mcstructs": "github:SolarFlurry/mcstructs"
   }
 }
