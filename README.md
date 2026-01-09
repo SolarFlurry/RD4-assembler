@@ -1,5 +1,7 @@
 # RD4 Assembler
 
+This project is licensed under the [GNU General Public License v3.0](./COPYING)
+
 This is an assembler made for the Red Diamond 4 redstone computer.
 
 Export format: `.mcstructure`

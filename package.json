@@ -13,7 +13,7 @@
   "private": true,
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0-only",
   "type": "module",
   "devDependencies": {
     "@lezer/generator": "^1.8.0",
