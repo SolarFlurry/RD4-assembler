@@ -1,4 +1,5 @@
-import './main.css'
+import '../css/main.css'
+import { MenuBar } from './menuBar';
 
 export abstract class Component {
 	element: HTMLElement
@@ -14,12 +15,18 @@ export abstract class Component {
 
 class Root extends Component {
 	private children: Component[]
+	menuBar: MenuBar
 	constructor() {
 		super(document.createElement('div'));
 		this.children = []
-		this.element.style
+		this.element.style.overflow = 'hidden'
 		this.element.id = "root"
 		document.body.appendChild(this.element);
+	}
+	public setMenuBar(menubar: MenuBar) {
+		this.menuBar = menubar
+		this.element.appendChild(menubar.element)
+		this.element.style.maxHeight = 'calc(100vh - 2rem)';
 	}
 	public add(component: Component) {
 		this.children.push(component);

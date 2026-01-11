@@ -1,7 +1,7 @@
 import './assembler.css'
 
 import { EditorView } from "codemirror";
-import { Component } from "../component";
+import { Component } from "../components/component";
 import { highlightActiveLine, lineNumbers } from "@codemirror/view";
 import { parser } from "./highlight/parser";
 import { foldGutter, HighlightStyle, LRLanguage, syntaxHighlighting } from "@codemirror/language";
@@ -34,7 +34,7 @@ const myHighlightStyle = HighlightStyle.define([
 const theme = EditorView.theme({
 	"&": {
 		backgroundColor: '#29292b',
-		height: 'calc(100vh - 2rem)',
+		height: 'calc(100vh - 4rem)',
 	},
 	"& .cm-content": {
 		fontFamily: "'Fira Code', monospace",

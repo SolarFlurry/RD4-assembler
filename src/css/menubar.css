@@ -1,0 +1,20 @@
+.menu-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	width: calc(100vw - 6rem);
+	top: 0;
+	background-color: #3a414cff;
+	padding: 0 3rem;
+}
+
+.menu-bar-item {
+	display: flex;
+	flex-direction: column;
+	padding: 0.5rem 1rem;
+	transition: all 0.2s;
+}
+
+.menu-bar-item:hover {
+	background-color: var(--primary);
+}
