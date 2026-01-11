@@ -1,28 +1,44 @@
 import '../css/menubar.css'
 
-export class MenuBarOption {
+export abstract class MenuBarWidget {
 	element: HTMLElement;
-	constructor(text: string) {
+}
+
+export class MenuBarOption extends MenuBarWidget {
+	constructor(text: string, callback: (event: PointerEvent) => void) {
+		super();
 		this.element = document.createElement('div');
+		this.element.classList.add('submenu-option')
 		this.element.innerText = text;
+		this.element.addEventListener('click', callback)
+	}
+}
+
+export class MenuBarDivider extends MenuBarWidget {
+	constructor() {
+		super();
+		this.element = document.createElement('div');
+		this.element.classList.add('submenu-divider')
 	}
 }
 
 export class MenuBarItem {
 	element: HTMLElement;
 	options: MenuBarOption[]
-	constructor(text: string, options: MenuBarOption[] | ((event: PointerEvent) => void)) {
+	constructor(text: string, options: MenuBarOption[]) {
 		this.element = document.createElement('div')
-		this.element.innerText = text;
+		this.options = options;
+
+		const span = document.createElement('span')
+		span.innerText = text
+		this.element.appendChild(span)
+
+		const submenu = document.createElement('submenu')
+		options.forEach((option) => submenu.appendChild(option.element))
+		submenu.classList.add('submenu')
+		this.element.appendChild(submenu)
+
 		this.element.classList.add('menu-bar-item')
-		if (Array.isArray(options)) {
-			this.options = options
-			for (const option of this.options) {
-				this.element.appendChild(option.element);
-			}
-		} else {
-			this.element.addEventListener('click', options)
-		}
 	}
 }
 

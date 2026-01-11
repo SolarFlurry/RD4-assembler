@@ -9,6 +9,7 @@
 }
 
 .menu-bar-item {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	padding: 0.5rem 1rem;
@@ -17,4 +18,39 @@
 
 .menu-bar-item:hover {
 	background-color: var(--primary);
+	cursor: pointer;
+}
+
+.menu-bar-item:hover .submenu {
+	display: block;
+}
+
+.submenu {
+	width: max-content;
+	background-color: white;
+	left: 0;
+	top: 2.2rem;
+	display: none;
+	position: absolute;
+	z-index: 1;
+}
+
+.submenu-option {
+	padding: 0.25rem 2rem 0.25rem 1rem;
+	color: black;
+	transition: all 0.1s;
+}
+
+.submenu-option:hover {
+	cursor: pointer;
+	background-color: var(--primary);
+	color: white;
+}
+
+.submenu-divider {
+	position: relative;
+	background-color: black;
+	height: 1px;
+	width: calc(100% - 1rem);
+	margin: 0.25rem 0.5rem;
 }
