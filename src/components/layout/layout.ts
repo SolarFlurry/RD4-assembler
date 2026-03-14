@@ -24,7 +24,6 @@ export class VerticalLayout extends Component {
 	constructor(components: Component[], sizes: number[], css?: Partial<CSSStyleDeclaration>) {
 		super(document.createElement('div'), css)
 
-		this.element = document.createElement('div');
 		this.element.style.display = 'grid';
 		this.element.style.justifyContent = 'space-around';
 		this.element.style.width = "100%";
@@ -35,6 +34,6 @@ export class VerticalLayout extends Component {
 		}
 		this.element.style.gridTemplateRows = sizes
 			.map((v) => v.toString())
-			.reduce((prev, current) => prev + current + "fr", "");
+			.reduce((prev, current) => prev + current + "fr ", "");
 	}
 }

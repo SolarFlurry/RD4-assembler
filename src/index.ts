@@ -1,12 +1,17 @@
 import { CodeEditorComponent } from "./assembler/codeEditor";
+import { ErrorListComponent } from "./assembler/errors";
+import { compile } from "./compiler";
 import { ButtonComponent } from "./components/button";
 import { root } from "./components/component";
 import { GreedyControl, PaddingControl } from "./components/control/control";
-import { HorizontalLayout } from "./components/layout/layout";
+import { HorizontalLayout, VerticalLayout } from "./components/layout/layout";
 import { MenuBar, MenuBarDivider, MenuBarItem, MenuBarOption } from "./components/menuBar";
 import { TextComponent } from "./components/text";
 
 const codeEditor = new CodeEditorComponent();
+const errorList = new ErrorListComponent();
+
+errorList.setText("Errors:\n98459728949723897 errors!\n\nOh, no, debugging will be a pain...");
 
 root.setMenuBar(new MenuBar([
 	new MenuBarItem('File', [
@@ -36,20 +41,25 @@ root.add(
 	new HorizontalLayout(
 		[
 			new PaddingControl(codeEditor, "1rem", { minWidth: '0' }),
-			new PaddingControl(new HorizontalLayout([
-				new ButtonComponent("Compile", () => { }),
-				new ButtonComponent("Export", () => {
-					const file = new Blob([codeEditor.view.state.doc.toString()], { type: 'text/plain' });
-					const a = document.createElement('a');
-					a.href = URL.createObjectURL(file);
-					a.download = 'assembly.txt';
-					document.body.appendChild(a);
-					a.click();
-					document.body.removeChild(a);
-					URL.revokeObjectURL(a.href);
-				}),
-				new ButtonComponent("Load", () => { })
-			], [1, 1, 1]), "1rem")
+			new PaddingControl(new GreedyControl(new VerticalLayout([
+				new HorizontalLayout([
+					new ButtonComponent("Compile", () => {
+						compile(codeEditor.view.state.doc.toString());
+					}),
+					new ButtonComponent("Export", () => {
+						const file = new Blob([codeEditor.view.state.doc.toString()], { type: 'text/plain' });
+						const a = document.createElement('a');
+						a.href = URL.createObjectURL(file);
+						a.download = 'assembly.txt';
+						document.body.appendChild(a);
+						a.click();
+						document.body.removeChild(a);
+						URL.revokeObjectURL(a.href);
+					}),
+					new ButtonComponent("Load", () => { })
+				], [1, 1, 1]),
+				errorList,
+			], [1, 9])), "1rem")
 		],
 		[
 			6,
