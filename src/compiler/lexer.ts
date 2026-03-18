@@ -12,6 +12,10 @@ export enum TokenKind {
 export interface Token {
     lexeme: string,
     kind: TokenKind,
+    loc: {
+        start: number,
+        end: number,
+    }
 }
 
 function isDigit(char: string): boolean {
@@ -48,6 +52,7 @@ export function tokenise(source: string): Token[] {
                     tokens.push({
                         lexeme: source.slice(start, i),
                         kind: TokenKind.Binary,
+                        loc: {start, end: i},
                     })
                     continue;
                 };
@@ -57,6 +62,7 @@ export function tokenise(source: string): Token[] {
                     tokens.push({
                         lexeme: source.slice(start, i),
                         kind: TokenKind.Hexadecimal,
+                        loc: {start, end: i},
                     })
                     continue;
                 };
@@ -67,6 +73,7 @@ export function tokenise(source: string): Token[] {
             tokens.push({
                 lexeme: source.slice(start, i),
                 kind: TokenKind.Decimal,
+                loc: {start, end: i},
             })
             continue;
         }
@@ -76,6 +83,7 @@ export function tokenise(source: string): Token[] {
             tokens.push({
                 lexeme: source.slice(start, i),
                 kind: TokenKind.Register,
+                loc: {start, end: i},
             })
             continue;
         }
@@ -84,19 +92,23 @@ export function tokenise(source: string): Token[] {
             tokens.push({
                 lexeme: source.slice(start, i),
                 kind: TokenKind.Instruction,
+                loc: {start, end: i},
             })
             continue;
         }
         i++;
-        tokens.push({
+        const token = {
             lexeme: source.slice(start, i),
             kind: TokenKind.Error,
-        })
+            loc: {start, end: i},
+        }
+        tokens.push(token);
     }
 
     tokens.push({
         lexeme: "eof",
         kind: TokenKind.Eof,
+        loc: {start: i, end: i},
     })
 
     return tokens;

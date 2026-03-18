@@ -19,14 +19,16 @@ class Root extends Component {
 	constructor() {
 		super(document.createElement('div'));
 		this.children = []
-		this.element.style.overflow = 'hidden'
+		this.element.style.position = "relative"
+		//this.element.style.overflow = 'hidden'
 		this.element.id = "root"
 		document.body.appendChild(this.element);
 	}
 	public setMenuBar(menubar: MenuBar) {
 		this.menuBar = menubar
 		this.element.appendChild(menubar.element)
-		this.element.style.maxHeight = 'calc(100vh - 2rem)';
+		this.element.style.top = "2rem";
+		this.element.style.height = "calc(100vh - 2rem)";
 	}
 	public add(component: Component) {
 		this.children.push(component);

@@ -1,5 +1,5 @@
 import { CodeEditorComponent } from "./assembler/codeEditor";
-import { ErrorListComponent } from "./assembler/errors";
+import { ErrorDisplayComponent } from "./assembler/errors";
 import { compile } from "./compiler";
 import { ButtonComponent } from "./components/button";
 import { root } from "./components/component";
@@ -9,9 +9,9 @@ import { MenuBar, MenuBarDivider, MenuBarItem, MenuBarOption } from "./component
 import { TextComponent } from "./components/text";
 
 const codeEditor = new CodeEditorComponent();
-const errorList = new ErrorListComponent();
+const errorList = new ErrorDisplayComponent();
 
-errorList.setText("Errors:\n98459728949723897 errors!\n\nOh, no, debugging will be a pain...");
+errorList.setText("No Errors");
 
 root.setMenuBar(new MenuBar([
 	new MenuBarItem('File', [
@@ -41,10 +41,10 @@ root.add(
 	new HorizontalLayout(
 		[
 			new PaddingControl(codeEditor, "1rem", { minWidth: '0' }),
-			new PaddingControl(new GreedyControl(new VerticalLayout([
+			new PaddingControl(new VerticalLayout([
 				new HorizontalLayout([
 					new ButtonComponent("Compile", () => {
-						compile(codeEditor.view.state.doc.toString());
+						compile(codeEditor.view.state.doc.toString(), errorList);
 					}),
 					new ButtonComponent("Export", () => {
 						const file = new Blob([codeEditor.view.state.doc.toString()], { type: 'text/plain' });
@@ -59,11 +59,8 @@ root.add(
 					new ButtonComponent("Load", () => { })
 				], [1, 1, 1]),
 				errorList,
-			], [1, 9])), "1rem")
+			], ["3rem", "calc(100vh - 8rem)"], {height: "100%"}), "1rem")
 		],
-		[
-			6,
-			2,
-		]
+		[5, 2]
 	)
 )

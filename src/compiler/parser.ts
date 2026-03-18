@@ -1,6 +1,8 @@
+import { addError } from "./errors";
 import { Token, TokenKind } from "./lexer";
 
 export interface Instruction {
+    tok: Token,
     name: string,
     regs: [number, number, number],
     data: number,
@@ -16,15 +18,22 @@ function advance() {
 function expect(kind: TokenKind) {
     if (tokens[index].kind == kind) {
         advance();
+        return;
     }
-    // error somehow
+    addError(tokens[index], `Unexpected "${tokens[index].lexeme}"`);
 }
 
 export function parse(inputTokens: Token[]): Instruction[] {
     tokens = inputTokens;
+    index = 0;
     const instructions: Instruction[] = [];
     while (index < tokens.length) {
         if (tokens[index].kind == TokenKind.Eof) break;
+        if (tokens[index].kind != TokenKind.Instruction) {
+            addError(tokens[index], `Unexpected '${tokens[index].lexeme}', expected an instruction`);
+            advance();
+            continue;
+        }
         instructions.push(parseInstruction());
     }
 
@@ -33,6 +42,7 @@ export function parse(inputTokens: Token[]): Instruction[] {
 
 function parseInstruction(): Instruction {
     const instr: Instruction = {
+        tok: tokens[index],
         name: tokens[index].lexeme,
         regs: [0, 0, 0],
         data: 0,
@@ -41,6 +51,9 @@ function parseInstruction(): Instruction {
     for (let i = 0; i < 3; i++) {
         if (tokens[index].kind == TokenKind.Register) {
             instr.regs[i] = parseInt(tokens[index].lexeme.slice(1));
+            if (instr.regs[i] > 31) {
+                addError(tokens[index], "Cannot have a register over 31");
+            }
             advance();
         }
     }

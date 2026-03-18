@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:dev": "webpack --mode development",
-    "build": "webpack --mode production",
-    "start": "cd dist && npx serve",
+    "dev": "vite dev",
+    "build": "bite build",
     "prepare": "lezer-generator grammars/assembly.grammar -o src/components/assembler/highlight/parser.js"
   },
   "private": true,
