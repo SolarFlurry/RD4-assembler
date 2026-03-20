@@ -54,14 +54,18 @@ export function codegen(instrs: Instruction[]): Uint8Array {
 export function writeMcStructure(hex: Uint8Array): Int8Array {
     const structure = new MCStructure(new Vec3(64, 16, Math.ceil(hex.length / 512) * 4));
 
+    const paletteIndex = structure.paletteAdd(new BlockType("minecraft:barrel"))
+
     let index = 0;
     outest: for (let i = 0; i < Math.ceil(hex.length / 512); i++) {
         for (let j = 0; j < 32; j ++) {
             for (let k = 0; k < 8; k ++) {
-                if (index >= hex.length) break outest;
-
+                if (index >= hex.length) {
+                    structure.setBlockPalette(new Vec3(j * 2, k * 2, i * 4), paletteIndex);
+                    continue;
+                }
                 let itemsRequired = Math.max(hex[index], Math.ceil((27 * 64 / 14) * (hex[index] - 1)))
-                const block = structure.setBlock(new Vec3(j * 2, k * 2, i * 4), new BlockType("minecraft:barrel"))
+                const block = structure.setBlockPalette(new Vec3(j * 2, k * 2, i * 4), paletteIndex)
                 for (let itemSlot = 0; itemsRequired != 0; itemSlot += 1) {
                     if (itemsRequired < 64) {
                         block.setItemSlot(itemSlot, "minecraft:redstone", itemsRequired);
