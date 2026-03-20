@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev",
     "build": "vite build",
-    "prepare": "lezer-generator grammars/assembly.grammar -o src/components/assembler/highlight/parser.js"
+    "prepare": "lezer-generator grammars/assembly.grammar -o src/assembler/highlight/parser.js"
   },
   "private": true,
   "keywords": [],
