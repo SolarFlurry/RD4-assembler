@@ -8,6 +8,8 @@ interface Error {
 
 let errors: Error[] = [];
 
+export function errorsNum(): number { return errors.length }
+
 export function addError(tok: Token, message: string) {
     errors.push({tok, message})
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev",
-    "build": "bite build",
+    "build": "vite build",
     "prepare": "lezer-generator grammars/assembly.grammar -o src/components/assembler/highlight/parser.js"
   },
   "private": true,
@@ -16,7 +16,9 @@
   "type": "module",
   "devDependencies": {
     "@lezer/generator": "^1.8.0",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0"
   },
   "dependencies": {
     "@codemirror/language": "^6.12.1",

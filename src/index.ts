@@ -11,6 +11,16 @@ import { TextComponent } from "./components/text";
 const codeEditor = new CodeEditorComponent();
 const errorList = new ErrorDisplayComponent();
 
+function downloadBlob(blob: Blob, filename: string) {
+	const a = document.createElement('a');
+	a.href = URL.createObjectURL(blob);
+	a.download = filename;
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+	URL.revokeObjectURL(a.href);
+}
+
 errorList.setText("No Errors");
 
 root.setMenuBar(new MenuBar([
@@ -44,22 +54,22 @@ root.add(
 			new PaddingControl(new VerticalLayout([
 				new HorizontalLayout([
 					new ButtonComponent("Compile", () => {
-						compile(codeEditor.view.state.doc.toString(), errorList);
+						const data = compile(codeEditor.view.state.doc.toString(), errorList);
+						console.log("fine after");
+						if (data == null) return;
+						downloadBlob(
+							new Blob([data.buffer as ArrayBuffer], { type: 'application/octet-stream' }),
+							'instructions.mcstructure'
+						)
 					}),
-					new ButtonComponent("Export", () => {
-						const file = new Blob([codeEditor.view.state.doc.toString()], { type: 'text/plain' });
-						const a = document.createElement('a');
-						a.href = URL.createObjectURL(file);
-						a.download = 'assembly.txt';
-						document.body.appendChild(a);
-						a.click();
-						document.body.removeChild(a);
-						URL.revokeObjectURL(a.href);
-					}),
+					new ButtonComponent("Export", () => downloadBlob(
+							new Blob([codeEditor.view.state.doc.toString()], { type: 'text/plain' }),
+							"assembly.txt"
+						)),
 					new ButtonComponent("Load", () => { })
 				], [1, 1, 1]),
 				errorList,
-			], ["3rem", "calc(100vh - 8rem)"], {height: "100%"}), "1rem")
+			], ["3rem", "calc(100vh - 8rem)"], { height: "100%" }), "1rem")
 		],
 		[5, 2]
 	)

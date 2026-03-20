@@ -1,10 +1,10 @@
 import { ErrorDisplayComponent } from "../assembler/errors";
-import { codegen } from "./codegen";
-import { clearErrors, outputErrors } from "./errors";
+import { codegen, writeMcStructure } from "./codegen";
+import { clearErrors, errorsNum, outputErrors } from "./errors";
 import { tokenise } from "./lexer";
 import { parse } from "./parser";
 
-export function compile(source: string, display: ErrorDisplayComponent) {
+export function compile(source: string, display: ErrorDisplayComponent): Int8Array | null {
     clearErrors();
 
     const tokens = tokenise(source);
@@ -16,4 +16,8 @@ export function compile(source: string, display: ErrorDisplayComponent) {
     const hex = codegen(instrs);
     console.log(hex);
     outputErrors(source, display);
+
+    if (errorsNum() > 0) return null;
+
+    return writeMcStructure(hex);
 }
