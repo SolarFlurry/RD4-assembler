@@ -52,13 +52,13 @@ export function codegen(instrs: Instruction[]): Uint8Array {
 }
 
 export function writeMcStructure(hex: Uint8Array): Int8Array {
-    const structure = new MCStructure(new Vec3(64, 16, Math.ceil(hex.length / 512) * 4));
+    const structure = new MCStructure(new Vec3(62, 16, Math.ceil(hex.length / 512) * 4));
 
     const paletteIndex = structure.paletteAdd(new BlockType("minecraft:barrel"))
 
     let index = 0;
     outest: for (let i = 0; i < Math.ceil(hex.length / 512); i++) {
-        for (let j = 0; j < 32; j ++) {
+        for (let j = 0; j < 31; j ++) {
             for (let k = 0; k < 8; k ++) {
                 if (index >= hex.length) {
                     structure.setBlockPalette(new Vec3(j * 2, k * 2, i * 4), paletteIndex);

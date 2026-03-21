@@ -51,7 +51,7 @@ function parseInstruction(): Instruction {
     for (let i = 0; i < 3; i++) {
         if (tokens[index].kind == TokenKind.Register) {
             instr.regs[i] = parseInt(tokens[index].lexeme.slice(1));
-            if (instr.regs[i] > 31) {
+            if (instr.regs[i] > 15) {
                 addError(tokens[index], "Cannot have a register over 31");
             }
             advance();
