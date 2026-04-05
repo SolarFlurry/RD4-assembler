@@ -88,7 +88,7 @@ export function tokenise(source: string): Token[] {
             continue;
         }
         if (isUpperAlpha(source[i])) {
-            while (isUpperAlpha(source[i]) && i < source.length) i++;
+            while ((isUpperAlpha(source[i]) || isDigit(source[i])) && i < source.length) i++;
             tokens.push({
                 lexeme: source.slice(start, i),
                 kind: TokenKind.Instruction,

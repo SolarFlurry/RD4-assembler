@@ -2,24 +2,32 @@ import { BlockType, MCStructure, Vec3 } from "mcstructs";
 import { addError } from "./errors";
 import { Instruction } from "./parser";
 
-function instrToHex(instr: string): number {
-    return [
+function instrToHex(instr: string): [number, number] | null{
+    const index = [
         "ADD",
         "XOR",
         "OR",
+        "HLT",
         "NOR",
         "AND",
         "XNOR",
         "SUB",
         "RET",
         "LDL",
-        "CAL",
+        "PSH",
         "OVF",
         "RWR",
         "RRD",
         "PRR",
         "PWR",
     ].findIndex((value) => value == instr);
+
+    if (index == -1) return null;
+
+    return [
+        Math.floor(index / 16),
+        index % 16,
+    ];
 }
 
 function intToHexArray(num: number, hexits: number): number[] {
@@ -41,11 +49,12 @@ export function codegen(instrs: Instruction[]): Uint8Array {
 
     for (const instr of instrs) {
         const instrHex = instrToHex(instr.name);
-        if (instrHex == -1) {
+        if (instrHex == null) {
             addError(instr.tok, `No instruction named "${instr.name}"`);
             continue;
         }
-        hex.push(instrHex, ...intToHexArray(instr.data, 4),...instr.regs);
+        const data = intToHexArray(instr.data, 4);
+        hex.push(...instrHex, ...data.slice(0, 3), data[3] | instr.regs[2], instr.regs[0], instr.regs[1]);
     }
 
     return Uint8Array.from(hex);
@@ -80,6 +89,5 @@ export function writeMcStructure(hex: Uint8Array): Int8Array {
         }
     }
 
-    console.log("fine before");
     return structure.asBytes();
 }

@@ -48,14 +48,25 @@ function parseInstruction(): Instruction {
         data: 0,
     }
     expect(TokenKind.Instruction);
+    let regsAdded = 0;
     for (let i = 0; i < 3; i++) {
         if (tokens[index].kind == TokenKind.Register) {
+            regsAdded++;
             instr.regs[i] = parseInt(tokens[index].lexeme.slice(1));
             if (instr.regs[i] > 15) {
                 addError(tokens[index], "Cannot have a register over 31");
             }
             advance();
         }
+    }
+
+    while (tokens[index].kind == TokenKind.Register) {
+        advance();
+        regsAdded++;
+    }
+
+    if (regsAdded > 3) {
+        addError(instr.tok, "Cannot have over 3 registers attached to an instruction");
     }
 
     if (tokens[index].kind == TokenKind.Binary ||

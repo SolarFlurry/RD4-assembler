@@ -5,7 +5,7 @@
 @tokens {
 	space { @whitespace+ }
 	Comment {";"![\n]*}
-	Instr {$[A-Z]$[A-Z]$[A-Z]}
+	Instr {$[A-Z]$[A-Z0-9]*}
 	Label {"."$[A-Za-z_]$[A-Za-z0-9_]*}
 	Reg {"r"$[0-9]+}
 	Number {

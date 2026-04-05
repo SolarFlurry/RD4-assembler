@@ -55,12 +55,11 @@ root.add(
 				new HorizontalLayout([
 					new ButtonComponent("Compile", () => {
 						const data = compile(codeEditor.view.state.doc.toString(), errorList);
-						console.log("fine after");
 						if (data == null) return;
-						downloadBlob(
-							new Blob([data.buffer as ArrayBuffer], { type: 'application/octet-stream' }),
-							'instructions.mcstructure'
-						)
+						// downloadBlob(
+						// 	new Blob([data.buffer as ArrayBuffer], { type: 'application/octet-stream' }),
+						// 	'instructions.mcstructure'
+						// )
 					}),
 					new ButtonComponent("Export", () => downloadBlob(
 							new Blob([codeEditor.view.state.doc.toString()], { type: 'text/plain' }),
